@@ -12,7 +12,7 @@ import java.io.File
  * Download files and return file paths
  *
  * @param links - URLs of files to download (e.g., "https://domain-name.org/files/file.png")
- * @param downloadPath - path a local folder to save the file (e.g., "files/images")
+ * @param downloadPath - absolute path a local folder to save the file (e.g., "/home/user/files/images")
  */
 suspend fun download(links: List<String>, downloadPath: String): List<String> {
     val filePaths = ArrayList<String>()
@@ -24,16 +24,16 @@ suspend fun download(links: List<String>, downloadPath: String): List<String> {
     return filePaths
 }
 
-fun getFilename(link: String): String {
+private fun getFilename(link: String): String {
     val filename = link.substringAfter("emojis/").substringBefore('/')
     return "$filename.png"
 }
 
-suspend fun downloadFile(url: String, downloadPath: String, filename: String): String {
+private suspend fun downloadFile(url: String, downloadPath: String, filename: String): String {
     val httpClient = HttpClient(CIO)
     var outputFilePath = downloadPath + File.separator + filename
     try {
-        val outputFile = File(outputFilePath).apply { mkdirs() }
+        val outputFile = File(outputFilePath).apply { parentFile?.mkdirs() }
         httpClient.get(url).body<ByteReadChannel>().copyAndClose(outputFile.writeChannel())
         println("Successfully downloaded file ${filename} to folder ${outputFilePath}")
     } catch (e: Exception) {
