@@ -12,10 +12,10 @@ suspend fun main() {
     println("Processing is about to start. Config:\nLinks folder: $linksPath\nDownload folder: $downloadPath\nResized folder: $resizedPath")
 
     val pathsToFilesWithLinks = listOf(
-        linksPath + File.separator + "dynamic.txt",
+        linksPath + File.separator + "links_1.txt",
     )
     val pathsToFilesWithIgnoreLinks = listOf(
-        linksPath + File.separator + "ignore_links.txt",
+        linksPath + File.separator + "links_ignore.txt",
     )
     val downloadLinks = read(pathsToFilesWithLinks)
     val ignoreLinks = read(pathsToFilesWithIgnoreLinks)
