@@ -22,6 +22,7 @@ fun resize(originalFiles: List<File>, resizedPath: String): List<File> {
         resizeImage(100, 100, "png", file, outputFile)
         resizedFiles.add(outputFile)
     }
+    println("Resized ${resizedFiles.size} images")
     return resizedFiles
 }
 

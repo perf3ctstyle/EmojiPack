@@ -22,6 +22,7 @@ suspend fun download(links: List<String>, downloadPath: String): List<File> {
         val file = downloadFile(link, downloadPath, filename)
         files.add(file)
     }
+    println("Downloaded ${files.size} files")
     return files
 }
 
