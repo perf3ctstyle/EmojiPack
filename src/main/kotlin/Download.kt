@@ -36,7 +36,7 @@ private suspend fun downloadFile(url: String, downloadPath: String, filename: St
     val outputFile = File(outputFilePath).apply { parentFile?.mkdirs() }
     try {
         httpClient.get(url).body<ByteReadChannel>().copyAndClose(outputFile.writeChannel())
-        println("Successfully downloaded file ${filename} to folder ${outputFilePath}")
+        println("Successfully downloaded file ${filename} and saved it to ${outputFilePath}")
     } catch (e: Exception) {
         println("Exception while downloading file $filename, message: ${e.message}")
     } finally {
