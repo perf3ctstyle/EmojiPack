@@ -13,15 +13,16 @@ import java.io.File
  *
  * @param links - URLs of files to download (e.g., "https://domain-name.org/files/file.png")
  * @param downloadPath - absolute path a local folder to save the file (e.g., "/home/user/files/images")
+ * @return list of downloaded files
  */
-suspend fun download(links: List<String>, downloadPath: String): List<String> {
-    val filePaths = ArrayList<String>()
+suspend fun download(links: List<String>, downloadPath: String): List<File> {
+    val files = ArrayList<File>()
     for (link in links) {
         val filename = getFilename(link)
-        val downloadedFilePath = downloadFile(link, downloadPath, filename)
-        filePaths.add(downloadedFilePath)
+        val file = downloadFile(link, downloadPath, filename)
+        files.add(file)
     }
-    return filePaths
+    return files
 }
 
 private fun getFilename(link: String): String {
@@ -29,18 +30,17 @@ private fun getFilename(link: String): String {
     return "$filename.png"
 }
 
-private suspend fun downloadFile(url: String, downloadPath: String, filename: String): String {
+private suspend fun downloadFile(url: String, downloadPath: String, filename: String): File {
     val httpClient = HttpClient(CIO)
-    var outputFilePath = downloadPath + File.separator + filename
+    val outputFilePath = downloadPath + File.separator + filename
+    val outputFile = File(outputFilePath).apply { parentFile?.mkdirs() }
     try {
-        val outputFile = File(outputFilePath).apply { parentFile?.mkdirs() }
         httpClient.get(url).body<ByteReadChannel>().copyAndClose(outputFile.writeChannel())
         println("Successfully downloaded file ${filename} to folder ${outputFilePath}")
     } catch (e: Exception) {
         println("Exception while downloading file $filename, message: ${e.message}")
-        outputFilePath = downloadPath + File.separator + filename + "_NOT_DOWNLOADED"
     } finally {
         httpClient.close()
     }
-    return outputFilePath
+    return outputFile
 }
