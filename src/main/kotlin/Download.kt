@@ -11,7 +11,7 @@ import java.io.File
 /**
  * Download files and return file paths
  *
- * @param links - URLs of files to download (e.g., "https://domain-name.org/files/file.png")
+ * @param links - URLs of files to download (e.g., "https://slackmojis.com/emojis/13943-meow_hungry/download")
  * @param downloadPath - absolute path a local folder to save the file (e.g., "/home/user/files/images")
  * @return list of downloaded files
  */
