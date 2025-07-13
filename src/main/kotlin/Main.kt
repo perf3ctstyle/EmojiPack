@@ -8,7 +8,7 @@ suspend fun main() {
             File.separator + "ImagesWithKotlin"
     val linksPath = workingDir + File.separator + "Links"
     val downloadPath = workingDir + File.separator + "DownloadedImages" + File.separator + "13_07_2025"
-    val resizedPath = workingDir + File.separator + "ResizedImages" + File.separator + "Processed" + File.separator + "13_07_2025"
+    val resizedPath = workingDir + File.separator + "ResizedImages" + File.separator + "13_07_2025"
     println("Processing is about to start. Config:\nLinks folder: $linksPath\nDownload folder: $downloadPath\nResized folder: $resizedPath")
 
     val pathsToFilesWithLinks = listOf(
