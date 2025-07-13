@@ -7,15 +7,15 @@ suspend fun main() {
             File.separator + "Downloads" +
             File.separator + "ImagesWithKotlin"
     val linksPath = workingDir + File.separator + "Links"
-    val downloadPath = workingDir + File.separator + "DownloadedImages"
-    val resizedPath = workingDir + File.separator + "ResizedImages"
+    val downloadPath = workingDir + File.separator + "DownloadedImages" + File.separator + "13_07_2025"
+    val resizedPath = workingDir + File.separator + "ResizedImages" + File.separator + "Processed" + File.separator + "13_07_2025"
     println("Processing is about to start. Config:\nLinks folder: $linksPath\nDownload folder: $downloadPath\nResized folder: $resizedPath")
 
     val pathsToFilesWithLinks = listOf(
-        linksPath + File.separator + "links_1.txt",
+        linksPath + File.separator + "links_13_07_2025.txt",
     )
     val pathsToFilesWithIgnoreLinks = listOf(
-        linksPath + File.separator + "links_ignore.txt",
+        linksPath + File.separator + "links_ignore.txt", // strange and already processed links
     )
     val downloadLinks = read(pathsToFilesWithLinks)
     val ignoreLinks = read(pathsToFilesWithIgnoreLinks)
